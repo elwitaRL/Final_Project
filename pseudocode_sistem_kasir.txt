@@ -1,0 +1,28 @@
+Sistem kasir (memasukan item dan auto calculate total harga)
+
+START
+
+READ AND WRITE "alat_scan_barang" with object
+READ AND WRITE "harga_satuan" with number
+READ AND WRITE "jumlah_barang" with  number 
+READ AND WRITE "total" with number
+READ AND WRITE "uang" with number
+
+STORE "harga_satuan" with number 100000
+STORE "total" with CALCULATE "harga_satuan" multiply by "jumlah_barang"
+PRINT "total"
+
+IF "total" >= 1000000
+	STORE "total" with discount 15% CALCULATE "total" minus ("total" multiply by 15%)
+ELSE "total" < 1000000
+	STORE "total" with discount 0%
+
+INPUT "uang"
+STORE "kembalian" with CALCULATE "uang" minus "total"
+WHILE input "uang" < "total" = TRUE
+STORE "uang" with add input nominal
+
+CALL nota_pembayaran
+
+END
+
